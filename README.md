@@ -18,8 +18,8 @@ This is an end-to-end machine learning-driven project designed to detect and fla
 
 
 ## Task List
-- [ ] Data Profiling | Preliminary Analysis
-- [ ] Data Preprocessing
+- [ ] Data Profiling(EDA) | Preliminary Analysis
+- [ ] Data Preprocessing | Baseline Predictions
 - [ ] Experiment Tracking and Model Registry
 - [ ] Workflow Orchestration
 - [ ] Model Deployment
