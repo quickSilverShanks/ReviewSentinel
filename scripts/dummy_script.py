@@ -30,10 +30,13 @@ import click
     help="boolean parameter"
 )
 def functn(param1, param2, param3):
+    # Combine default values with provided values, if any
+    default_p2vals = set(("file1.py", "file2.py"))
+    param2 = tuple(default_p2vals.union(set(param2)))
+
     print(f"param1 : {param1}")
     print(f"param2, paramtype : {param2}, {type(param2)}")
-    print(f"param2 : element1 : {param2[0]}")
-    print(f"param2 : element2 : {param2[1]}")
+    print(f"param2, contents : {', '.join(param2)}")
     if param3:
         print(f"param3 True : {param3}")
     else:
