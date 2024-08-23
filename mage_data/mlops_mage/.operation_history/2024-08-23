@@ -1,0 +1,3 @@
+{"operation": "create", "resource": {"type": "pipeline", "uuid": "ingest_data"}, "timestamp": 1724436537, "user": null}
+{"operation": "create", "resource": {"type": "pipeline", "uuid": "masterful_sword"}, "timestamp": 1724436633, "user": null}
+{"operation": "create", "resource": {"type": "pipeline", "uuid": "data_preparation"}, "timestamp": 1724437190, "user": null}
