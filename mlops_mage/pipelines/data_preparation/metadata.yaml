@@ -2,18 +2,75 @@ blocks:
 - all_upstream_blocks_executed: true
   color: null
   configuration: {}
-  downstream_blocks: []
+  downstream_blocks:
+  - data_loader_bar_chart_s7
+  - unique_values_for_data_loader
+  - missing_values_for_data_loader
+  - data_prepare
+  - dummy_block
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: python
   name: Data Loader
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
   type: data_loader
   upstream_blocks: []
   uuid: data_loader
+- all_upstream_blocks_executed: false
+  color: grey
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: Dummy Block
+  retry_config: null
+  status: executed
+  timeout: null
+  type: custom
+  upstream_blocks:
+  - data_loader
+  uuid: dummy_block
+- all_upstream_blocks_executed: false
+  color: null
+  configuration:
+    file_path: transformers/data_prepare.py
+    file_source:
+      path: transformers/data_prepare.py
+  downstream_blocks:
+  - data_export
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: Data Prepare
+  retry_config: null
+  status: failed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - data_loader
+  uuid: data_prepare
+- all_upstream_blocks_executed: false
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: Data Export
+  retry_config: null
+  status: updated
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - data_prepare
+  uuid: data_export
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}
@@ -36,5 +93,83 @@ spark_config: {}
 tags: []
 type: python
 uuid: data_preparation
+variables:
+  review_col: text_
+  target: label
+  target_mapper: '{''CG'':1, ''OR'':0}'
 variables_dir: /home/src/mage_data/mlops_mage
-widgets: []
+widgets:
+- all_upstream_blocks_executed: false
+  color: null
+  configuration:
+    chart_style: horizontal
+    chart_type: bar chart
+    group_by:
+    - rating
+    - label
+    metrics:
+    - aggregation: count
+      column: category
+    width_percentage: '1'
+    x: x
+    y: y
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: data_loader_bar chart_s7
+  retry_config: null
+  status: executed
+  timeout: null
+  type: chart
+  upstream_blocks:
+  - data_loader
+  uuid: data_loader_bar_chart_s7
+- all_upstream_blocks_executed: false
+  color: null
+  configuration:
+    chart_style: horizontal
+    chart_type: bar chart
+    group_by:
+    - category
+    metrics:
+    - aggregation: count
+      column: category
+    x: columns
+    y: number_of_unique_values
+    y_sort_order: descending
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: unique values for data_loader
+  retry_config: null
+  status: executed
+  timeout: null
+  type: chart
+  upstream_blocks:
+  - data_loader
+  uuid: unique_values_for_data_loader
+- all_upstream_blocks_executed: false
+  color: null
+  configuration:
+    chart_style: horizontal
+    chart_type: bar chart
+    x: columns_with_mising_values
+    y: percentage_of_missing_values
+    y_sort_order: descending
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: missing values for data_loader
+  retry_config: null
+  status: executed
+  timeout: null
+  type: chart
+  upstream_blocks:
+  - data_loader
+  uuid: missing_values_for_data_loader

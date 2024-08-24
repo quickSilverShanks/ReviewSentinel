@@ -8,16 +8,14 @@ if 'data_loader' not in globals():
 # if 'test' not in globals():
 #     from mage_ai.data_preparation.decorators import test
 
-
 @data_loader
 def load_data(*args, **kwargs):
     """
-    Template code for loading data from any source.
+    Loading data from github location.
 
     Returns:
-        Anything (e.g. data frame, dictionary, array, int, str, etc.)
+        Dataframe with text reviews and other columns
     """
-    # Specify your data loading logic here
 
     response = requests.get(
         "https://raw.githubusercontent.com/quickSilverShanks/ReviewSentinel/main/data/fake%20reviews%20dataset.csv"
