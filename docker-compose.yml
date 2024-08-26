@@ -1,11 +1,10 @@
 services:
   magic-platform:
-    image: mageai/mageai:latest
     env_file:
       - .env.dev
     build:
       context: .
-    command: mage start $PROJECT_NAME
+    command: /app/run_app.sh mage start $PROJECT_NAME
     ports:
       - 6789:6789
     volumes:
@@ -42,11 +41,12 @@ services:
   mlflow:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: mlflow.dockerfile
     ports:
       - "5000:5000"
     volumes:
       - "${PWD}/mlflow:/home/mlflow/"
+      - "${PWD}/mlflow/mlartifacts:/home/mlartifacts/"
     networks:
       - app-network
 networks:

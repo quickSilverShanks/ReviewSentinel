@@ -1,8 +1,8 @@
 import pandas as pd
 
 from mlops_mage.utils.data_preparation.text_cleaning import clean
-from mlops.utils.data_preparation.splitters import data_splits
-from mlops.utils.data_preparation.feature_engineering import get_features
+from mlops_mage.utils.data_preparation.splitters import data_splits
+from mlops_mage.utils.data_preparation.feature_engineering import get_features
 
 
 if 'transformer' not in globals():
@@ -31,7 +31,7 @@ def transform(data, *args, **kwargs):
 
     review_col = kwargs.get('review_col')
 
-    data_clean = clean(df_in, text_col=review_col)
+    data_clean = clean(data, text_col=review_col)
     data_train, data_val, data_test = data_splits(data_clean)
     df_train, df_val, df_test, vectorizer, scaler = get_features(data_train, data_val, data_test)
 
