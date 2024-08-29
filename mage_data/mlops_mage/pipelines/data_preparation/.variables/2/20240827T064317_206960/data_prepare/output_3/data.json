@@ -1,0 +1,1 @@
+{"module": "sklearn.feature_extraction.text", "name": "TfidfVectorizer", "type": "instance", "uuid": "sklearn.feature_extraction.text.TfidfVectorizer", "hash": "0x7f2ee084cac0", "variable_type": "model_sklearn"}

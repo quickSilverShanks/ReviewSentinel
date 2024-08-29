@@ -1,0 +1,1 @@
+{"train_xy": "./artifacts/workflow_orchestration/train.pkl", "val_xy": "./artifacts/workflow_orchestration/val.pkl", "test_xy": "./artifacts/workflow_orchestration/test.pkl"}

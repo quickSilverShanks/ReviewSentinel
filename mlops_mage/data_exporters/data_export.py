@@ -9,19 +9,22 @@ if 'data_exporter' not in globals():
 
 
 @data_exporter
-def export_data_to_file(data, **kwargs) -> None:
+def export_data_to_file(data, **kwargs):
     """
     Template for exporting data to filesystem.
 
     Docs: https://docs.mage.ai/design/data-loading#fileio
+
+    Exports 5 pickle files that contain ndarrays for train-val-test splits (as tuples of and y features)
+        and TfidfVectorizer and StandardScaler objects
 
     Args:
         data : tuple with train-val-test splits of preprocessed i/p data
                and TfidfVectorizer and StandardScaler objects
     
     Returns:
-        None, exports 5 pickle files that contain ndarrays for train-val-test splits (as tuples of and y features)
-               and TfidfVectorizer and StandardScaler objects
+        
+        
     """
     df_train, df_val, df_test, vectorizer, scaler = data
 
@@ -40,15 +43,19 @@ def export_data_to_file(data, **kwargs) -> None:
     test_x, test_y = get_xydata(df_test, cols_x, col_y)
 
     filepath = './artifacts/workflow_orchestration/'
-    with open(filepath+'train.pickle', 'wb') as f_out:
+    with open(filepath+'train.pkl', 'wb') as f_out:
         pickle.dump((train_x, train_y), f_out)
-    with open(filepath+'val.pickle', 'wb') as f_out:
+    with open(filepath+'val.pkl', 'wb') as f_out:
         pickle.dump((val_x, val_y), f_out)
-    with open(filepath+'test.pickle', 'wb') as f_out:
+    with open(filepath+'test.pkl', 'wb') as f_out:
         pickle.dump((test_x, test_y), f_out)
-    with open(filepath+'vectorizer.pickle', 'wb') as f_out:
+    with open(filepath+'vectorizer.pkl', 'wb') as f_out:
         pickle.dump(vectorizer, f_out)
-    with open(filepath+'scaler.pickle', 'wb') as f_out:
+    with open(filepath+'scaler.pkl', 'wb') as f_out:
         pickle.dump(scaler, f_out)
     
-    # return (train_x, train_y), (val_x, val_y), (test_x, test_y), vectorizer, scaler
+    # IMPORTANT : returning ndarrays does not work as it can't be serialized by mage yet.
+    # return (train_x, train_y), (val_x, val_y), (test_x, test_y)
+    return {'train_xy': filepath+'train.pkl',
+            'val_xy': filepath+'val.pkl',
+            'test_xy': filepath+'test.pkl'}

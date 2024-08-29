@@ -1,0 +1,114 @@
+blocks:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    global_data_product:
+      uuid: data_splits_origin
+  downstream_blocks:
+  - hyperparameter_tuning/sklearn
+  - test_block2
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: Origin Splits
+  retry_config: null
+  status: executed
+  timeout: null
+  type: global_data_product
+  upstream_blocks: []
+  uuid: origin_splits
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: markdown
+  name: Dynamic Block Info
+  retry_config: null
+  status: updated
+  timeout: null
+  type: markdown
+  upstream_blocks: []
+  uuid: dynamic_block_info
+- all_upstream_blocks_executed: true
+  color: teal
+  configuration:
+    file_path: custom/load_sklearn_models.py
+    file_source:
+      path: custom/load_sklearn_models.py
+  downstream_blocks:
+  - hyperparameter_tuning/sklearn
+  - test_block2
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: Load SkLearn Models
+  retry_config: null
+  status: executed
+  timeout: null
+  type: custom
+  upstream_blocks: []
+  uuid: load_sklearn_models
+- all_upstream_blocks_executed: true
+  color: grey
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: Test Block2
+  retry_config: null
+  status: executed
+  timeout: null
+  type: custom
+  upstream_blocks:
+  - load_sklearn_models
+  - origin_splits
+  uuid: test_block2
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: Hyperparameter Tuning/sklearn
+  retry_config: null
+  status: updated
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - load_sklearn_models
+  - origin_splits
+  uuid: hyperparameter_tuning/sklearn
+cache_block_output_in_memory: false
+callbacks: []
+concurrency_config: {}
+conditionals: []
+created_at: '2024-08-26 15:10:28.175372+00:00'
+data_integration: null
+description: This trains basic sklearn and xgboost models on the pre-processed train
+  data.
+executor_config: {}
+executor_count: 1
+executor_type: null
+extensions: {}
+name: Basic Models
+notification_config: {}
+remote_variables_dir: null
+retry_config: {}
+run_pipeline_in_one_process: false
+settings:
+  triggers: null
+spark_config: {}
+tags: []
+type: python
+uuid: basic_models
+variables_dir: /home/src/mage_data/mlops_mage
+widgets: []

@@ -6,6 +6,8 @@ def get_xydata(df_in, cols_x, col_y):
     Also, the col_y column should be integer target.
     Using global variable for target mapper on global target variable before passing the parameter to this function call is suggested.
     '''
+    assert all([col in df_in.columns for col in cols_x + col_y]), "required column(s) from input parameters not found"
+
     df_x = df_in[cols_x].copy()
     df_y = df_in[col_y].copy()
 

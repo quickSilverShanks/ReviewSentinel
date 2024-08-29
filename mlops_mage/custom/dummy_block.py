@@ -8,12 +8,10 @@ import nltk
 
 if 'custom' not in globals():
     from mage_ai.data_preparation.decorators import custom
-if 'test' not in globals():
-    from mage_ai.data_preparation.decorators import test
 
 
 @custom
-def transform_custom(*args, **kwargs):
+def transform_custom(data_in, *args, **kwargs):
     """
     args: The output from any upstream parent blocks (if applicable)
 
@@ -29,12 +27,5 @@ def transform_custom(*args, **kwargs):
     print(type(target_mapper), target_mapper)   # <class 'str'> {'CG':1, 'OR':0}
     target_mapper_dict = ast.literal_eval(kwargs.get('target_mapper'))
     print(type(target_mapper_dict), target_mapper_dict)
-    # return {}
 
-
-# @test
-# def test_output(output, *args) -> None:
-#     """
-#     Template code for testing the output of the block.
-#     """
-#     assert output is not None, 'The output is undefined'
+    print(f"Input from previous block : {type(data_in)}, {len(data_in)}")

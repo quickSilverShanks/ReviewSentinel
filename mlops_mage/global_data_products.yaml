@@ -1,0 +1,8 @@
+data_splits_origin:
+  object_type: pipeline
+  object_uuid: data_preparation
+  outdated_after:
+    seconds: 3599
+  repo_path: /home/src/mlops_mage
+  settings:
+    data_export: {}
